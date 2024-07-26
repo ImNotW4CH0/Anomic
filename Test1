@@ -1,6 +1,7 @@
 local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 local mainMenu = playerGui:WaitForChild("MainMenu")
 local loadingScreen = mainMenu:WaitForChild("LoadingScreen")
+loadingScreen.Visible = true
 
 loadingScreen:GetPropertyChangedSignal("Visible"):Connect(function()
     if not loadingScreen.Visible then
