@@ -3,50 +3,52 @@ local mainMenu = playerGui:WaitForChild("MainMenu")
 local loadingScreen = mainMenu:WaitForChild("LoadingScreen")
 
 while true do
+    -- Espera hasta que el LoadingScreen no sea visible
     if not loadingScreen.Visible then
-             local args = {
-    [1] = "Safe Seven"
-}
+        -- Ejecuta los comandos uno por uno con pausas
+        local args1 = {
+            [1] = "Safe Seven"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("TeamChanger"):FireServer(unpack(args1))
+        task.wait(1.5)
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("TeamChanger"):FireServer(unpack(args))
-task.wait(1.5)
-local args = {
-    [1] = "SpawnChar",
-    [2] = "Depository"
-}
+        local args2 = {
+            [1] = "SpawnChar",
+            [2] = "Depository"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnCharacter"):InvokeServer(unpack(args2))
+        task.wait(1.5)
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnCharacter"):InvokeServer(unpack(args))
-task.wait(1.5)
-local args = {
-    [1] = "RequestMoneyTransport"
-}
+        local args3 = {
+            [1] = "RequestMoneyTransport"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("BankerFunction"):FireServer(unpack(args3))
+        task.wait(1)
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("BankerFunction"):FireServer(unpack(args))
+        -- Mueve el Money Truck al personaje
+        game.Players.LocalPlayer.Backpack["Money Truck"].Parent = game.Players.LocalPlayer.Character
+        task.wait(1)
 
-task.wait(1)
-game.Players.LocalPlayer.Backpack["Money Truck"].Parent = game.Players.LocalPlayer.Character
-task.wait(1)
-local args = {
-    [1] = CFrame.new(2089.596923828125, -68.98097229003906, -1394.36328125, 0, 0, 1, 4.371138828673793e-08, 1, 0, -1, 4.371138828673793e-08, 0),
-    [2] = game.Players.LocalPlayer.Character["Money Truck"]
-}
+        local args4 = {
+            [1] = CFrame.new(2089.596923828125, -68.98097229003906, -1394.36328125, 0, 0, 1, 4.371138828673793e-08, 1, 0, -1, 4.371138828673793e-08, 0),
+            [2] = game.Players.LocalPlayer.Character["Money Truck"]
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnVehicle"):FireServer(unpack(args4))
+        task.wait(1)
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnVehicle"):FireServer(unpack(args))
-task.wait(1)
-local args = {
-    [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck")
-}
+        local args5 = {
+            [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck")
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("LockCar"):FireServer(unpack(args5))
+        task.wait(1)
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("LockCar"):FireServer(unpack(args))
-local args = {
-    [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck"),
-    [2] = "FrontLeft"
-}
+        local args6 = {
+            [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck"),
+            [2] = "FrontLeft"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("EnterVehicle"):FireServer(unpack(args6))
 
-game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("EnterVehicle"):FireServer(unpack(args))
-
-
-        break
+        break  -- Sale del bucle después de ejecutar todas las acciones
     end
-    wait(1)
+    task.wait(1)  -- Espera un segundo antes de volver a verificar
 end
