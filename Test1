@@ -4,10 +4,49 @@ local loadingScreen = mainMenu:WaitForChild("LoadingScreen")
 
 while true do
     if not loadingScreen.Visible then
-        print("hola")
+             local args = {
+    [1] = "Safe Seven"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("TeamChanger"):FireServer(unpack(args))
+task.wait(1.5)
+local args = {
+    [1] = "SpawnChar",
+    [2] = "Depository"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnCharacter"):InvokeServer(unpack(args))
+task.wait(1.5)
+local args = {
+    [1] = "RequestMoneyTransport"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("BankerFunction"):FireServer(unpack(args))
+
+task.wait(1)
+game.Players.LocalPlayer.Backpack["Money Truck"].Parent = game.Players.LocalPlayer.Character
+task.wait(1)
+local args = {
+    [1] = CFrame.new(2089.596923828125, -68.98097229003906, -1394.36328125, 0, 0, 1, 4.371138828673793e-08, 1, 0, -1, 4.371138828673793e-08, 0),
+    [2] = game.Players.LocalPlayer.Character["Money Truck"]
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("SpawnVehicle"):FireServer(unpack(args))
+task.wait(1)
+local args = {
+    [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("LockCar"):FireServer(unpack(args))
+local args = {
+    [1] = workspace:WaitForChild("PlayerVehicles"):WaitForChild("Money Truck"),
+    [2] = "FrontLeft"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("_CS.Events"):WaitForChild("EnterVehicle"):FireServer(unpack(args))
+
+
         break
     end
     wait(1)
 end
-
-print('started')
