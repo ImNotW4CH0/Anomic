@@ -2,8 +2,12 @@ local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui
 local mainMenu = playerGui:WaitForChild("MainMenu")
 local loadingScreen = mainMenu:WaitForChild("LoadingScreen")
 
-loadingScreen:GetPropertyChangedSignal("Visible"):Connect(function()
+while true do
     if not loadingScreen.Visible then
         print("hola")
+        break
     end
-end)
+    wait(1)
+end
+
+print('started')
